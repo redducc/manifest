@@ -1,3 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
+  <remote  name="cyclone"
+           fetch="https://github.com/Cyclone-OS/"
+           revision="s" />
+
+  <!-- Rootdir -->
+  <project path="bionic" name="bionic" groups="pdk" remote="cyclone" />
+  <project path="manifest" name="manifest" remote="cyclone" />
+
+  <!-- Bootable -->
+  <project path="bootable/recovery" name="bootable_recovery" groups="pdk" remote="cyclone" />
+
+  <!-- Build -->
+  <project path="build/make" name="build" groups="pdk" remote="cyclone" >
+    <copyfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+    <linkfile src="core" dest="build/core" />
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+    <linkfile src="target" dest="build/target" />
+    <linkfile src="tools" dest="build/tools" />
+  </project>
+  <project path="build/soong" name="build_soong" groups="pdk,tradefed" remote="cyclone" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+
+  <!-- Frameworks -->
+  <project path="frameworks/av" name="frameworks_av" remote="cyclone" />
+  <project path="frameworks/base" name="frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="cyclone" />
+  <project path="frameworks/native" name="frameworks_native" groups="pdk-cw-fs,pdk-fs" remote="cyclone" />
+  <project path="frameworks/opt/telephony" name="frameworks_opt_telephony" remote="cyclone" />
+
+  <!-- Hardware -->
+  <project path="hardware/interfaces" name="hardware_interfaces" remote="cyclone" />
+  <project path="hardware/cyclone/interfaces" name="hardware_cyclone_interfaces" remote="cyclone" />
+
+  <!-- Packages -->
+  <project path="packages/apps/Settings" name="packages_apps_Settings" remote="cyclone" />
+  <project path="packages/apps/SettingsIntelligence" name="packages_apps_SettingsIntelligence" remote="cyclone" />
+  <project path="packages/apps/ThemePicker" name="packages_apps_ThemePicker" remote="cyclone" />
+  <project path="packages/services/Telecomm" name="packages_services_Telecomm" remote="cyclone" />
+  <project path="packages/services/Telephony" name="packages_services_Telephony" remote="cyclone" />
+
+  <!-- System -->
+  <project path="system/core" name="system_core" groups="pdk" remote="cyclone" />
+  <project path="system/netd" name="system_netd" remote="cyclone" />
+  <project path="system/sepolicy" name="system_sepolicy" remote="cyclone" />
+
 </manifest>
